@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  mymongo:
+    image: "mongo:latest"
+    container_name: "mymongo"
+    ports: 
+      - "27017:27017"
+  collector:
+    image: "collector-compose-alpine"
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+    container_name : "collector"
+    ports:  
+      - "8085:8085"
+    links:  
+      - "mymongo:mongo"
